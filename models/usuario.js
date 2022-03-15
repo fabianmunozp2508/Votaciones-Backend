@@ -23,15 +23,8 @@ const UsuarioSchema = Schema({
         required: true,
         default: 'USER_ROLE'
     },
-    facebookProvider: {
-        type: {
-              id: String,
-              email: String,
-              displayName: String,
-              token: String
-        },
-        select: false
-  }   
+    facebook_id :{  type: Number }, 
+   
 });
 
 
@@ -43,3 +36,6 @@ UsuarioSchema.method('toJSON', function() {
 
 
 module.exports = model( 'Usuario', UsuarioSchema );
+
+
+

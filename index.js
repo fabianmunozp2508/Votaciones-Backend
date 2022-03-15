@@ -5,6 +5,10 @@ const passport = require('./controller/facebook');
 const cors = require('cors');
 const morgan = require ('morgan');
 const compression = require('compression');
+const facebookStrategy = require('passport-facebook').Strategy
+const session  = require ('express-session');
+const pug = require ( 'pug')
+
 
 //carga de Imagenes 
 const multer = require ('multer');
@@ -22,11 +26,13 @@ app.use(cors());
 app.use(express.json());
 
 //conection db
+app.use(compression());
 dbConnection();
-
 //middlewares
 app.use(compression());
+//inicializacion de passport
 app.use(passport.initialize());
+
 
 app.use(morgan("dev"));
 app.use(express.urlencoded({extended:false}));
@@ -38,14 +44,11 @@ app.use(express.json());
  
 
  //Routes
-
- 
  app.use( '/vph/', require('./routes/authFacebook') ); 
  app.use( '/vph/buscar', require('./routes/busquedas') ); 
  app.use( '/vph/login', require('./routes/auth') );
  app.use( '/vph/usuarios', require('./routes/usuarios') );
  app.use( '/vph/social',upload.single('image'), require('./routes/social') );
-
  // end connect
  app.get('*', (req, res) => {
     res.sendFile( path.resolve( __dirname, 'public/index.html' ) );

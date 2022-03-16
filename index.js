@@ -5,9 +5,8 @@ const passport = require('./controller/facebook');
 const cors = require('cors');
 const morgan = require ('morgan');
 const compression = require('compression');
-const facebookStrategy = require('passport-facebook').Strategy
-const session  = require ('express-session');
-const pug = require ( 'pug')
+
+
 
 
 //carga de Imagenes 

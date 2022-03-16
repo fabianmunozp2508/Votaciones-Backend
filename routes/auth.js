@@ -1,7 +1,6 @@
 //login
 const { Router } = require('express');
-const { login,renewToken } = require('../controller/auth');
-const passport = require('passport');
+const { login,renewToken,googleSignIn,facebookSing } = require('../controller/auth');
 const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-JWT');
@@ -15,6 +14,19 @@ router.post( '/',
         validarCampos
     ],
     login
+);
+router.post( '/google',
+    [        
+        check('token', 'El token es obligatorio').not().isEmpty(),
+        validarCampos
+    ],
+    googleSignIn
+);
+router.post( '/facebook',    [        
+        check('token', 'El token es obligatorio').not().isEmpty(),
+        validarCampos
+    ],
+    facebookSing
 );
 router.get( '/renew',
     validarJWT,

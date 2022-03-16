@@ -9,7 +9,7 @@ passport.use(
   {
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret:process.env.FACEBOOK_APP_SECRET,
-    callbackURL : process.env.FACEBOOK_CALLBACK_URL,
+    callbackURL :process.env.FACEBOOK_CALLBACK_URL,
     profileFields: ['id', 'emails', 'name', 'picture']
   },
     
@@ -22,7 +22,7 @@ passport.use(
     const user = await Usuario.findOne({facebook_id : id});
     if(!user)
     {
-        const user = new Usuario({facebook_id : id , nombre, email, img});
+        const user = new Usuario({provider_id : id , nombre, email,img });
         await user.save();
         console.log('Facebook profile data stored in database');
     }
